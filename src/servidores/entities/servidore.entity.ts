@@ -158,7 +158,7 @@ export class ResponsabilidadServidor {
     @Column({ type: 'varchar', nullable: true})
     IdDependencia: string;
 
-  @ManyToOne(() => ServidoresEnContrataciones)
+  @ManyToOne(() => ServidoresEnContrataciones, {onDelete: "CASCADE"})
   @JoinColumn({ name: 'IdServidorEnContrataciones' })
   ServidoresEnContrataciones: ServidoresEnContrataciones;
 
@@ -174,7 +174,7 @@ export class AreaServidor {
     IdServidorEnContrataciones: string;
     @PrimaryColumn({ type: 'varchar'})
     IdTipoArea: string;
-  @ManyToOne(() => ServidoresEnContrataciones)
+  @ManyToOne(() => ServidoresEnContrataciones,  {onDelete: "CASCADE"})
   @JoinColumn({ name: 'IdServidorEnContrataciones' })
   ServidoresEnContrataciones: ServidoresEnContrataciones;
 
@@ -191,7 +191,7 @@ export class ProcedimientoServidor {
     @PrimaryColumn({ type: 'varchar'})
     IdTipoProcedimiento: string;
 
-  @ManyToOne(() => ServidoresEnContrataciones)
+  @ManyToOne(() => ServidoresEnContrataciones,  {onDelete: "CASCADE"})
   @JoinColumn({ name: 'IdServidorEnContrataciones' })
   ServidoresEnContrataciones: ServidoresEnContrataciones;
 

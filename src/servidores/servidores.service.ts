@@ -159,8 +159,11 @@ export class ServidoresService {
   }
 
   async findOne(id: string): Promise<any> {
-    const servidor = await this.ServidoresEnContratacionesRepository.findOne({where: {IdServidorEnContrataciones: id }, relations: ['Servidor',   'AreaServidor', 'ProcedimientoServidor', 'ResponsabilidadServidor', ]})
-    
+    const servidor = await this.ServidoresEnContratacionesRepository.findOne({where: {IdServidorEnContrataciones: id }, 
+      relations: ['Servidor',   'AreaServidor', 'ProcedimientoServidor', 'ResponsabilidadServidor', ]})
+    if (!servidor) {
+      throw new BadRequestException(`No se encontro el servidor con el id ${id}`);
+    }
   const result = { ...servidor,
     AreaServidor: servidor.AreaServidor.map(area => (area.TipoArea.TipoArea)),
     ProcedimientoServidor: servidor.ProcedimientoServidor.map(procedimiento => (procedimiento.TipoProcedimiento.TipoProcedimiento)),
@@ -176,7 +179,14 @@ export class ServidoresService {
     return `This action updates a #${id} servidore`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} servidore`;
+  async remove(id: string) {
+    const servidores = await this.ServidoresEnContratacionesRepository.findOne( {where: {IdServidorEnContrataciones: id}})
+    if (servidores) {
+      await this.ServidoresEnContratacionesRepository.remove(servidores)
+      return `Servidor Eliminado`;
+    } else {
+      throw new BadRequestException(`No se encontro el servidor con el id ${id}`);
+    }
+    
   }
 }

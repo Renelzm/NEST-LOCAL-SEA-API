@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServidoresModule } from './servidores/servidores.module';
 import { Servidor } from './servidores/entities/servidore.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { Servidor } from './servidores/entities/servidore.entity';
       synchronize: true,
     }),
     ServidoresModule,
+    AuthModule,
 
   ],
   

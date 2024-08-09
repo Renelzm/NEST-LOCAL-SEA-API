@@ -5,14 +5,17 @@ export class CreateServidoreDto {
 
     @IsString()
     @MinLength(1)
+    @Transform(({ value }) => value.toUpperCase())
     Nombres : string;
     
     @IsString()
     @MinLength(1)
+    @Transform(({ value }) => value.toUpperCase())
     PrimerApellido : string;
     
     @IsString()
     @MinLength(1)
+    @Transform(({ value }) => value.toUpperCase())
     SegundoApellido : string;
     
     @IsString()
